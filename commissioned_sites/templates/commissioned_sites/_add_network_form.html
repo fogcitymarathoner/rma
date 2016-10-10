@@ -1,0 +1,8 @@
+<button class="btn primary btn-warning" id='add-return-item'>Add Site Network</button>
+<p>&nbsp</p>
+<table id='return-items' border="1">
+    {% for i in networks %}
+        {{ i| safe}}
+        <tr><td>============================================</td></tr>
+    {% endfor %}
+</table>

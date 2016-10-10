@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-4 field-name">Description</div>
+    <div class="col-md-8 data"> {{  part.description  }}</div>
+</div>
+<div class="row">
+    <div class="col-md-4 field-name">Note</div>
+    <div class="col-md-8 data">
+        {{  part.note}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 field-name">Model Number</div>
+    <div class="col-md-8 data">
+        {{  part.model_number }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 field-name">
+        Returned Parts
+    </div>
+</div>
+<form id='move-part' action="{% url 'confirm_move_items' %}" method="POST">{% csrf_token %}
+        <table>
+            <div class="row">
+                <div class="col-md-12 data">
+                     <input id="select-all-return-items" type="checkbox">&nbsp;SELECT ALL
+                </div>
+            </div>
+            <div id="returned-items-list">
+                <div class="row list-header">
+                    <div class="col-md-3 data">Date Customer</div>
+                    <div class="col-md-2 data">Description</div>
+                    <div class="col-md-2 data">Quantity</div>
+                    <div class="col-md-5 data">Note</div>
+                </div>
+                {% for i in items %}
+                <div class="row">
+                    <div class="col-md-3 data">
+                    <input type="checkbox" name="part-{{ i.id }}" value="{{ i.id }}">
+                        {{  i.rma.date }}&nbsp;{{  i.rma.customer.name }}
+                    </div>
+                    <div class="col-md-2 data">
+                        {{  i.part.description }}
+                    </div>
+                    <div class="col-md-2 data">
+                        {{  i.quantity }}
+                    </div>
+                    <div class="col-md-5 data">
+                        {{  i.note }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            {{ form.as_table }}
+            <input class="btn primary" id='move-parts-button' type="submit" value="Move Returned Items" />
+        </table>
+</form>
+<div class="row">
+    <div class="col-md-12 field-name-small">Last Modified By {{ user.username }} - {{ user.username.first }} {{ user.username.last }}</div>
+</div>

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load cycle from future %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+        {% if user.is_authenticated %}
+        <div class="page-header">
+            <h1>Customer Sites</h1>
+            <p>Use this app to reassign customer RMA sites from temporary 'UNKNOWNCOMPANY' to a real customer.</p>
+        </div>
+
+        <div class="row list-header">
+            <div class="col-md-6">
+                Customer Name
+            </div>
+            <div class="col-md-6">
+                Site Name
+            </div>
+        </div>
+        <div class="row">
+                <div id="customers">
+                    {% for i in sites %}
+                        <div class="row  {% cycle 'odd-row' 'even-row' %}">
+                            <div class="col-md-6">
+                                <a href="{% url   'view_customer_site_to_reassign' id=i.id  %}">{{  i.customer.company_name  }}</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{% url   'view_customer_site_to_reassign' id=i.id  %}">{{  i.name  }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+        {% else %}
+            <h1>Please Log In</h1>
+        {% endif %}
+    </div>
+    <script src="{{ STATIC_URL   }}js/operations.js"></script>
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+        <div class="page-header">{% include "customers/_customer_header.html" %}</div>
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 16px">
+                {% if request.user|has_group:"user" %}
+                    <a class="btn btn-success" id='edit-customer-button' href="{% url 'edit_customer' id=customer.id  %}">Edit</a>
+                    <a class="btn btn-success" id='create-customer-button' href="{% url 'create_customer_site_for_customer' customer_id=customer.id  %}">Add Site For This Customer</a>
+                {% endif %}
+                {% if request.user|has_group:"poweruser" %}
+                    <a class="btn btn-success" id='delete-customer-button' href="{% url 'delete_customer' id=customer.id  %}">Delete</a>
+                {% endif %}
+                <a class="btn btn-success btn-warning" href="{% url 'list_customers' %}">Back to Customer List</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% include "customers/_view.html" %}
+                {% include "customers/_tabs.html" %}
+                <div class="tab-content">
+                  <div class="tab-pane active" id="rmas">
+                    {% include "customers/_view_rmas.html" %}
+                  </div>
+                  <div class="tab-pane" id="sites">
+                    {% include "customers/_view_sites.html" %}
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ STATIC_URL }}customers/js/customers.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('#tabs').tab();
+            $('#company-rmas-tab-nav').click(function (e) {
+                $('#rmas').addClass('active');
+                $('#company-rmas-tab-nav').addClass('active');
+                $('#sites').removeClass('active');
+                $('#company-sites-tab-nav').removeClass('active');
+            });
+            $('#company-sites-tab-nav').click(function (e) {
+
+                $('#sites').addClass('active');
+                $('#company-sites-tab-nav').addClass('active');
+                $('#rmas').removeClass('active');
+                $('#company-rmas-tab-nav').removeClass('active');
+            });
+        });
+    </script>
+{% endblock content %}

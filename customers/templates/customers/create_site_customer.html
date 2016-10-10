@@ -1,0 +1,28 @@
+{% extends "base_form.html" %}
+{% block content %}
+    <div class="container">
+        <div class="page-header">{% include "customers/_customer_header.html" %}</div>
+        <form  id="create-customer-site" action="" method="post">{% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input class="btn primary btn-success" type="submit" value="Save Customer Site" />
+            <button class="btn primary btn-warning" type="submit" id="customer-site-create-cancel-button">CANCEL</button>
+        </form>
+    </div>
+    <script type="text/javascript">
+        var cancel_url = "{% url 'list_customers' %}";
+        $('#customer-site-create-cancel-button').click(function(e) {
+            window.location.replace(cancel_url);
+            e.preventDefault()
+        });
+        var customer_id = {{ customer_id }};
+        $('select#id_customer').val(customer_id);
+        jQuery(document).ready(function ($) {
+            $('#tabs').tab();
+        });
+        $(function() {
+            $( "#id_date" ).datepicker({ dateFormat: "yy-mm-dd" });
+        });
+    </script>
+{% endblock content %}

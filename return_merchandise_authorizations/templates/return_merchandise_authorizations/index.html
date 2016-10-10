@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load sharepoint_rma_url %}
+{% load cycle from future %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+        {% if user.is_authenticated %}
+        <div class="page-header">
+            <h1>Return Merchandise Authorizations</h1>
+            <p class="lead">Recent RMA's accessible by customer name</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 16px">
+                {% if request.user|has_group:"user" %}
+                    <a class="btn btn-success" id='create-rma-button' href="{% url 'create_rma'  %}">New</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div  class="row">
+                    <form name="customer-search-form" action="" method="get">
+                        Enter a few letters of customer name or site name
+                        <input name='find-rma-by-customer-input' id="autoText" maxlength="20" />
+                        <a href="{% url   'home_page' %}">reset</a>
+                    </form>
+                </div>
+                <div  class="row list-header">
+                    <div class="col-md-1">Date</div>
+                    <div class="col-md-1">Case Number</div>
+                    <div class="col-md-2">Customer</div>
+                    <div class="col-md-3">Site</div>
+                    <div class="col-md-5">Issue</div>
+                </div>
+                <div id="rmas">
+                    {% for i in rmas %}
+                        <div  class="row {% cycle 'odd-row' 'even-row' %}">
+                            <div class="col-md-1" id="rma-date-{{ i.id }}">
+                                    <a href="{% url 'view_rma' id=i.id  %}">{{  i.date| date:'m/d/Y'  }}</a>
+                            </div>
+                            <div class="col-md-1" id="rma-case_number-{{ i.id }}">
+                                    <a href="{% url 'view_rma' id=i.id  %}">{{  i.case_number  }}</a>
+                            </div>
+                            <div class="col-md-2" id="rma-company_name-{{ i.id }}">
+                                <a href="{% url 'view_rma' id=i.id  %}">{{  i.customer.customer.company_name  }}</a>
+                            </div>
+                            <div class="col-md-3" id="rma-site-{{ i.id }}">
+                                <a href="{% url 'view_rma' id=i.id  %}">{{  i.customer  }}</a>
+                                {% if i.sharepoint_origin == 2 %}
+                                    {{ i | share_point_rma_url |safe }}|
+                                {% endif %}
+                            </div>
+                            <div class="col-md-5" id="rma-issue-{{ i.id }}">
+                                <a href="{% url 'view_rma' id=i.id  %}">{{  i.issue  }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% else %}
+            <h1>Please Log In</h1>
+        {% endif %}
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("input#autoText").autocomplete({
+            width: 300,
+            max: 10,
+            delay: 100,
+            minLength: 1,
+            autoFocus: true,
+            cacheLength: 1,
+            scroll: true,
+            highlight: false,
+            source: function(request, response) {
+            // start spinner
+            $('#wait-area').addClass( 'waiting div400x100' );
+
+                $.ajax({
+                    url: "{{ customers_service_url }}",
+                    dataType: "html",
+                    data: request,
+                    success: function( result) {
+                         $('#rmas').html(result);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                         console.log( textStatus);
+                    }
+                });
+            // stop spinner
+            $('#wait-area').removeClass( 'waiting div400x100' );
+            }
+
+        });
+            // reload back and forward events
+    if ($("input#autoText").val() != ''){
+
+
+            // start spinner
+            $('#wait-area').addClass( 'waiting div400x100' );
+                data = { term: $("input#autoText").val()};
+                $.ajax({
+                    url: "{{ customers_service_url }}",
+                    dataType: "html",
+                    data: data,
+                    success: function( result) {
+                         $('#rmas').html(result);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                         console.log( textStatus);
+                    }
+                });
+            // stop spinner
+            $('#wait-area').removeClass( 'waiting div400x100' );
+    }
+    });
+
+    </script>
+
+{% endblock content %}

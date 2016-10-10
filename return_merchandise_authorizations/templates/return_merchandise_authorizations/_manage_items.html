@@ -1,0 +1,30 @@
+{% load user_group %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 field-name"><h3>Items</h3></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 field-name">Name</div>
+            <div class="col-md-4 field-name">Quantity</div>
+            <div class="col-md-4 field-name">Model Number</div>
+        </div>
+        {% for i in items %}
+            {% if request.user|has_group:"user" %}
+                <div class="row manage-returned-item-operations">
+                    <div class="col-md-4"><a href="{% url 'edit_returned_item' id=i.id  %}">{{  i.name  }}</a></div>
+                    <div class="col-md-3"><a href="{% url 'edit_returned_item' id=i.id  %}">{{  i.quantity  }}</a></div>
+                    <div class="col-md-4"><a href="{% url 'edit_returned_item' id=i.id  %}">{{  i.model_number  }}</a></div>
+                    <div class="col-md-1"><a href="{% url 'delete_returned_item' id=i.id  %}">DELETE</a></div>
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col-md-4">{{  i.name  }}</div>
+                    <div class="col-md-3">{{  i.quantity  }}</div>
+                    <div class="col-md-4">{{  i.model_number  }}</div>
+                    <div class="col-md-1"></div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

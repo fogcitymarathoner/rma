@@ -1,0 +1,124 @@
+.. _crypto:
+
+minipylib.crypto
+================
+
+.. automodule:: minipylib.crypto
+    :show-inheritance:
+
+
+Classes, Functions & Constants
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+AES encryption class
+--------------------
+
+.. autoclass:: CipherError
+    :show-inheritance:
+
+.. autoclass:: Cipher
+    :show-inheritance:
+
+    .. automethod:: __init__
+
+    .. automethod:: set_secret
+
+    .. automethod:: gen_key
+
+    .. automethod:: make_digest
+
+    .. automethod:: encrypt
+
+    .. automethod:: decrypt
+
+
+Encode/decode helper functions
+------------------------------
+
+.. autofunction:: get_encoder
+
+.. autofunction:: get_decoder
+
+.. autofunction:: encode_data
+
+.. autofunction:: decode_data
+
+
+The following is an example function to encode or decode text or
+binary data using the ``encode_data`` and ``decode_data`` helper functions.::
+
+    def encoder(data, secret, mode):
+        """
+        encrypt or decrypt data.
+
+        :param data: data to be encoded/decoded
+        :param secret: secret password
+        :param mode: 'e' (encode) or 'd' (decode)
+        :returns: encoded/decoded data
+        """
+        if mode == 'd':
+            plaintext = decode_data(data, secret, encoding='base64')
+            print plaintext
+        else:
+            ciphertext = encode_data(data, secret, encoding='base64')
+            print ciphertext
+
+
+
+
+Hash digest functions
+---------------------
+
+.. autofunction:: file_digest
+
+.. data:: DefaultHash
+
+   Default hash algoithm (callable)::
+
+       DefaultHash = hashlib.sha256
+
+.. data:: DefaultHashAlgorithms
+
+    Dict of supported algorithm used for hashing::
+
+        DefaultHashAlgorithms = {
+            'md5': hashlib.md5,
+            'sha1': hashlib.sha1,
+            'sha224': hashlib.sha224,
+            'sha256': hashlib.sha256,
+            'sha384': hashlib.sha384,
+            'sha512': hashlib.sha512
+        }
+
+
+.. autofunction:: md5_for_file
+
+.. autofunction:: make_digest
+
+
+Utility functions
+-----------------
+
+.. data:: DEFAULT_KEYSIZE
+
+   ::
+
+        DEFAULT_KEY_SIZE = 72
+
+
+.. data:: SECRET_KEY_CHAR_SET
+
+   ::
+
+        SECRET_KEY_CHAR_SET = "anp"
+
+
+.. data:: DEFAULT_KEY_CHAR_SET
+
+   ::
+
+        DEFAULT_KEY_CHAR_SET = "an"
+
+
+.. autofunction:: gen_secret_key

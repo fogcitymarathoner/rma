@@ -1,0 +1,23 @@
+{% extends "base_form.html" %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "operations/_customer_site_move_rma_header.html" %}</div>
+    <form action="" method="post">{% csrf_token %}
+        {% include "operations/_new_site_or_customer_button.html" %}
+        <input id="id_customer" name="customer" readonly="readonly" type="text" style="display: none"/>
+	    <input id="autocomplete" name="customer-auto" size=70 type="text" placeholder="Type a few characters of the client or site or address">
+        <input id='submit-new-site-selected-for-rma-moving' class="btn primary btn-success" type="submit" value="Save Move RMAs Below to this Customer Site" />
+    </form>
+    <a class="btn primary btn-warning" href="{% url 'view_customer_site_to_reassign' id=site.id  %}">CANCEL</a>
+    {% include "operations/_site_rmas.html" %}
+    <script>
+        var sites = {{ sites | safe }};
+        var assign_customer_select_customer = '{{ sub_url }}operations/assign_customer_select_customer';
+        var site_id = {{ site.id }};
+    </script>
+    <script src="{{ STATIC_URL }}js/operations.js"></script>
+
+    <script src="{{ STATIC_URL   }}js/site_edit.js"></script>
+    <script src="{{ STATIC_URL   }}return_merchandise_authorizations/js/highlight.js"></script>
+    <script src="{{ STATIC_URL   }}return_merchandise_authorizations/js/sites-autocomplete.js"></script>
+{% endblock content %}

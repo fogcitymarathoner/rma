@@ -1,0 +1,17 @@
+{% load i18n %}
+{% trans "Diagnostic message:" %}
+
+{{ debug_message }}
+
+-----------------------------------------------------------------------
+> {% trans "Subject:" %} {{ subject|safe }}
+
+{{ message|safe }}
+
+> {% trans "Recipients:" %}
+{% for recipient in recipients %}* {{ recipient|safe }}
+{% endfor %}
+
+-----------------------------------------------------------------------
+
+{% blocktrans %}-Your friendly {{ site_name }} notification moderation system{% endblocktrans %}

@@ -1,0 +1,21 @@
+<h3>Networks</h3>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>SSID</th>
+        <th>Password</th>
+        <th>Energy Manager IP Address</th>
+        <th>Energy Manager Username</th>
+        <th>Energy Manager Password</th>
+    </tr>
+    {% for i in networks %}
+        <tr>
+            <td>{{  i.wireless_network_name  }}</td>
+            <td>{{  i.ssid  }}</td>
+            <td>{{  i.password  }}</td>
+            <td>{{  i.energy_manager_ip_address  }}</td>
+            <td>{{  i.energy_manager_username  }}</td>
+            <td>{{  i.energy_manager_password  }}</td>
+        </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,13 @@
+{% extends "base_form.html" %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "returned_items/_customer_header.html" %}</div>
+    <form id='edit-returned-item' action="" method="post">{% csrf_token %}
+        <table>
+            {% include "returned_items/_customer_form.html" %}
+        </table>
+        <input class="btn primary" type="submit" value="Save Returned Item" />
+        <button class="btn primary" type="submit"><a href="{% url 'manage_items' id=item.rma.id  %}">CANCEL</a></button>
+    </form>
+    <script src="{{ STATIC_URL   }}return_merchandise_authorizations/js/rma_edit.js"></script>
+{% endblock content %}

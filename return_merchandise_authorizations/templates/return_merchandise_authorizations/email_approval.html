@@ -1,0 +1,5 @@
+{% extends "return_merchandise_authorizations/email.html" %}
+        {% block approval %}
+        <h1>APPROVED BY {{ rma.approved_by.username }} ON {{ rma.approved_on }}</h1>
+        <p style="font-size: 150%;  color: purple;">{{ rma.approval_notes }}</p>
+        {% endblock %}

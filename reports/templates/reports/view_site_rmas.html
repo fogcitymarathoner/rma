@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "customers/_customer_site_header.html" %}</div>
+
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 16px">
+            <a class="btn btn-success" id='delete-rma-button' href="{% url 'report_customer_sites' %}">BACK</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {% include "customers/_view_site.html" %}
+        </div>
+    </div>
+    {% include "reports/_view_rmas.html" %}
+    <script src="{{ STATIC_URL }}reports/js/reports.js"></script>
+
+{% endblock content %}

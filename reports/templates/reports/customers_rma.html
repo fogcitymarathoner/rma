@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "reports/_customers_rmas_header.html" %}</div>
+    <form action="" method="post">{% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+    </form>
+    <div id="customer-rma-results"></div>
+    <script>
+        var services_customers_rmas_url = '{{ sub_url }}services/customers_rmas_report/';
+    </script>
+    <script src="{{ STATIC_URL }}return_merchandise_authorizations/js/report_customer_rmas.js"></script>
+    <script src="{{ STATIC_URL }}reports/js/reports.js"></script>
+{% endblock content %}

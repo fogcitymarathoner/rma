@@ -1,0 +1,15 @@
+{% load admin_url %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>{{ settings.SITE_TITLE | safe }}</title>
+    {% include "snippets/common_header.html" %}
+    <script src="{{ STATIC_URL   }}return_merchandise_authorizations/js/rma.js"></script>
+</head>
+<body>
+    {% include "snippets/nav_bar.html" %}
+    <div id='wait-area'></div>
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

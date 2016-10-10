@@ -1,0 +1,21 @@
+{% extends "base_form.html" %}
+{% block content %}
+    <div class="container">
+        <div class="page-header">{% include "return_merchandise_authorizations/_customer_header_approve_rma.html" %}</div>
+        <form name='approve-rma' action="" method="post">{% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input class="btn primary btn-success" type="submit" value="Approve RMA" />
+            <button class="btn primary btn-warning" type="submit" id="rma-approve-cancel-button">CANCEL</button>
+        </form>
+    </div>
+    <script>
+        var cancel_url = "{% url 'view_rma' id=rma.id  %}";
+        $('#rma-approve-cancel-button').click(function(e) {
+            window.location.replace(cancel_url);
+            e.preventDefault()
+        });
+    </script>
+    <script src="{{ STATIC_URL   }}return_merchandise_authorizations/js/rma_edit.js"></script>
+{% endblock content %}

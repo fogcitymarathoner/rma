@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Returned Items Against Inventory</h1>
+    <table>
+      <tr class="list-header"><th>Item</th><th>Failure Counts</th><th>Total According to Inventory</th><th>Failure Percentage</th></tr>
+      <tr class="odd-row"><td>SU Cable</td><td id="su-cable-count">{{ su_cable_count }}</td><td><input id="su-cable-inventory-count"></td><td id="su-cable-failure-percentage"></td></tr>
+      <tr class="even-row"><td>Sensor Unit</td><td id="sensor-unit-count">{{ sensor_unit_count }}</td><td><input id="sensor-unit-inventory-count"></td><td id="sensor-unit-failure-percentage"></td></tr>
+      <tr class="odd-row"><td>Other</td><td id="other-count">{{ other_count }}</td><td><input id="other-inventory-count"></td><td id="other-failure-percentage"></td></tr>
+      <tr class="even-row"><td>LED Tube Lights</td><td id="led-tube-light-count">{{ led_tube_light_count }}</td><td><input id="led-tube-light-inventory-count"></td><td id="led-tube-light-failure-percentage"></td></tr>
+      <tr class="odd-row"><td>LED Drivers</td><td id="led-driver-count">{{ led_driver_count }}</td><td><input id="led-driver-inventory-count"></td><td id="led-driver-failure-percentage"></td></tr>
+      <tr class="even-row"><td>Gateway</td><td id="gateway-count">{{ gateway_count }}</td><td><input id="gateway-inventory-count"></td><td id="gateway-failure-percentage"></td></tr>
+      <tr class="odd-row"><td>Energy Manager</td><td id="energy-manager-count">{{ energy_manager_count }}</td><td><input id="energy-manager-inventory-count"></td><td id="energy-manager-failure-percentage"></td></tr>
+      <tr class="even-row"><td>Control Unit</td><td id="control-unit-count">{{ control_unit_count }}</td><td><input id="control-unit-inventory-count"></td><td id="control-unit-failure-percentage"></td></tr>
+      <tr class="odd-row"><td>Ballast</td><td id="ballast-count">{{ ballast_count }}</td><td><input id="ballast-inventory-count"></td><td id="ballast-failure-percentage"></td></tr>
+    </table>
+<table>
+
+<script src="{{ STATIC_URL }}reports/js/reports.js"></script>
+<script type="text/javascript">
+    $(function() {
+
+        $('#su-cable-inventory-count').change(function () {
+            $('#su-cable-failure-percentage').html((parseInt($('#su-cable-count').html()) / parseInt($('input#su-cable-inventory-count').val()))*100);
+         }
+        );
+        $('#sensor-unit-inventory-count').change(function () {
+            $('#sensor-unit-failure-percentage').html((parseInt($('#sensor-unit-count').html()) / parseInt($('input#sensor-unit-inventory-count').val()))*100);
+         }
+        );
+        $('#other-inventory-count').change(function () {
+            $('#other-failure-percentage').html((parseInt($('#other-count').html()) / parseInt($('input#other-inventory-count').val()))*100);
+         }
+        );
+        $('#led-tube-light-inventory-count').change(function () {
+            $('#led-tube-light-failure-percentage').html((parseInt($('#led-tube-light-count').html()) / parseInt($('input#led-tube-light-inventory-count').val()))*100);
+         }
+        );
+        $('#led-driver-inventory-count').change(function () {
+            $('#led-driver-failure-percentage').html((parseInt($('#led-driver-count').html()) / parseInt($('input#led-driver-inventory-count').val()))*100);
+         }
+        );
+        $('#gateway-inventory-count').change(function () {
+            $('#gateway-failure-percentage').html((parseInt($('#gateway-count').html()) / parseInt($('input#gateway-inventory-count').val()))*100);
+         }
+        );
+        $('#energy-manager-inventory-count').change(function () {
+            $('#energy-manager-failure-percentage').html((parseInt($('#energy-manager-count').html()) / parseInt($('input#energy-manager-inventory-count').val()))*100);
+         }
+        );
+        $('#control-unit-inventory-count').change(function () {
+            $('#control-unit-failure-percentage').html((parseInt($('#control-unit-count').html()) / parseInt($('input#control-unit-inventory-count').val()))*100);
+         }
+        );
+        $('#ballast-inventory-count').change(function () {
+            $('#ballast-failure-percentage').html((parseInt($('#ballast-count').html()) / parseInt($('input#ballast-inventory-count').val()))*100);
+         }
+        );
+    });
+</script>
+{% endblock content %}

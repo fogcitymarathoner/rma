@@ -1,0 +1,7 @@
+log.txt
+reload
+*.pyc
+.idea
+settings*
+local_settings*
+

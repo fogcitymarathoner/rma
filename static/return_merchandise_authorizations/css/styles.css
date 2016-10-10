@@ -1,0 +1,65 @@
+
+div.field-name {
+    background-color: lightgray;
+}
+div.field-name-small {
+    background-color: lightgray;
+    font-size: smaller;
+}
+div.field-name-smaller {
+    background-color: lightgray;
+    font-size: x-small;
+}
+div.data {
+    border-style: solid;
+    border-width: 1px;
+}
+div.row.list-header {
+    background-color: lightgray;
+}
+
+div.row.odd-row {
+    background-color: #aaaaaa;
+}
+div.row.even-row {
+    background-color: #dcdcdc;
+}
+tr.list-header {
+    background-color: lightgray;
+}
+
+tr.odd-row {
+    background-color: #aaaaaa;
+}
+tr.even-row {
+    background-color: #dcdcdc;
+}
+.ui-autocomplete {
+    position: absolute;
+    cursor: default;
+    height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;}
+span.welcome-name {
+    display: block;
+    padding-top: 10px;
+    color: black;
+}
+button.btn.primary {
+    color: white;
+    margin-left: 10px;
+}
+
+ul.errorlist{
+    color: red;
+}
+p.error-message{
+    color: red;
+    font-size: larger;
+}
+input#id_reference_number {
+    background-color: peachpuff;
+}
+.ui-autocomplete .highlight {
+    text-decoration: underline;
+}

@@ -1,0 +1,16 @@
+{% load cycle from future %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 field-name"><h3>Customer Sites</h3></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 field-name">Name</div>
+        </div>
+        {% for i in sites %}
+            <div class="row {% cycle 'odd-row' 'even-row' %}">
+                <div class="col-md-12"><a href="{% url   'view_customer_site' id=i.id  %}">{{  i.name  }}</a></div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

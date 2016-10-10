@@ -1,0 +1,44 @@
+{% load software_upgraded %}
+{{ username }} just created an Commissioned Site.
+Site Data
+Site Name
+{{  site.customer.name  }}
+Contact
+{{  site.contact}}
+Contact Phone
+{{  site.contact_phone_number}}
+Address
+{{  site.address}}}
+Date
+{{  site.date  | safe |date:"m/d/Y"}}
+Cloud SSH Tunnel Port
+{{  site.cloud_ssh_tunnel_port  }
+Number of Installed Energy Managers
+{{  site.number_of_installed_energy_managers  }}
+Number of Installed Energy Managers Notes
+{{  site.number_of_installed_energy_managers_notes }}
+Number of Installed Gateways
+{{  site.number_of_installed_gateways}}
+Number of Installed Sensor Units and Control Units
+{{  site.number_of_installed_sensor_units_and_control_units }}
+Number of Installed Sensor Units and Control Units Notes
+{{  site.number_of_installed_sensor_units_and_control_units_notes }}
+Number of Installed Enlighted Room Controls
+{{  site.number_of_installed_enlighted_room_controls }}
+Number of Installed Enlighted Room Controls Notes
+{{  site.number_of_installed_enlighted_room_controls_notes  }}
+Sensor Type
+{{  site.sensor_type  }}
+Software Version of Energy Manager
+{{  site.software_version_of_energy_manager  }}
+Software Version of Gateway
+{{  site.software_version_of_gateway  }}
+Software Version of Sensor Unit
+{{  site.software_version_of_sensor_unit  }}
+Software Upgrated
+{{ site| software_upgraded }}
+Notes
+{{  site.notes  }}
+{% include "return_merchandise_authorizations/_email_view_networks.txt" %}
+Last Modified By {{ site.last_modified_by.username }} - {{ site.last_modified_by.first }} {{ site.last_modified_by.last }}
+Last Modified on {{ site.last_modified_on }}

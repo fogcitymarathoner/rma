@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "reports/_customers_sites_header.html" %}</div>
+    <table>
+    {% for c in customers %}
+        <tr><td>{{ c.company_name }}</td><td>&nbsp</td></tr>
+        {% for s in c.sites %}
+
+        <tr><td>&nbsp</td><td><a href="{% url 'show_sites_rmas' id=s.id  %}">{{ s.name }}</a></td></tr>
+        {% endfor %}
+    {% endfor %}
+    </table>
+    <script src="{{ STATIC_URL }}return_merchandise_authorizations/js/report_customer_rmas.js"></script>
+    <script src="{{ STATIC_URL }}reports/js/reports.js"></script>
+{% endblock content %}

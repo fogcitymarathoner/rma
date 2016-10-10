@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "operations/_users_roles_header.html" %}</div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Users Roles</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 16px">
+            <table>
+                <tr>
+                    <th>User</th>
+                    <th>Role</th>
+                </tr>
+                {% for u in users_roles %}
+                    <tr class="user-role-result">
+                        <td><a href="{% url 'manage_user_roles' id=u.user.id  %}">{{ u.user.username }}</a></td>
+                        <td><a href="{% url 'manage_user_roles' id=u.user.id  %}">{{ u.role }}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <script src="{{ STATIC_URL   }}js/operations.js"></script>
+{% endblock content %}

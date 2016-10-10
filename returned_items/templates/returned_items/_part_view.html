@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-md-4 field-name">Description</div>
+    <div class="col-md-8 data"> {{  part.description  }}</div>
+</div>
+<div class="row">
+    <div class="col-md-4 field-name">Note</div>
+    <div class="col-md-8 data">
+        {{  part.note}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 field-name">Model Number</div>
+    <div class="col-md-8 data">
+        {{  part.model_number }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 field-name">
+        Returned Parts
+    </div>
+</div>
+<form action="{% url 'move_returned_items' %}" method="POST">{% csrf_token %}
+        <input type="hidden" value="{{ dest_part.id }}" name="dest-part-id">
+        <table>
+            <div class="row">
+                <div class="col-md-12 data">
+                     <input id="select-all-return-items-confirm" type="checkbox">&nbsp;SELECT ALL
+                </div>
+            </div>
+            <div id="returned-items-list-confirm">
+            {% for i in items %}
+            <div class="row">
+                <div class="col-md-4 data">
+                <input type="checkbox" name="part-{{ i.id }}" value="{{ i.id }}">
+                    {{  i.rma.date }}&nbsp;{{  i.rma.customer.name }}
+                </div>
+                <div class="col-md-4 data">
+                    {{  i.quantity }}
+                </div>
+                <div class="col-md-4 data">
+                    {{  i.note }}
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+
+            {{ form.as_table }}
+            <input class="btn  btn-success" type="submit" value="Confirm Moving Returned Items FROM {{ src_part.description }}&nbsp;{{ src_part.model_number }} TO {{ dest_part.description }}&nbsp;{{ dest_part.model_number }}" />
+        </table>
+</form>
+<div class="row">
+    <div class="col-md-12 field-name-small">Last Modified By {{ user.username }} - {{ user.username.first }} {{ user.username.last }}</div>
+</div>
+<script>
+    // reset previously selected from last screen
+    $('#select-all-return-items-confirm').attr('checked', true);
+    $('#returned-items-list-confirm').find(':checkbox').each(function(){
+        jQuery(this).prop('checked', true);
+    });
+
+</script>

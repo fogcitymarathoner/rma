@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "reports/_user_roles_header.html" %}</div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Users Roles</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 16px">
+            <table>
+                <tr>
+                    <th>User</th>
+                    <th>Role</th>
+                </tr>
+                {% for u in users_roles %}
+                    <tr class="user-role-result">
+                        <td>{{ u.user.username }}</td>
+                        <td>{{ u.role }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <script src="{{ STATIC_URL }}reports/js/reports.js"></script>
+{% endblock content %}

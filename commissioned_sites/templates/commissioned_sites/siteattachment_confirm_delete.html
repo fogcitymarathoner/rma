@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form action="" method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ object.file.name }}"?</p>
+    <input type="submit" value="Confirm" />
+</form>
+<a href="{% url 'site_manage_attachments' id=object.site.id %}">CANCEL</a>
+</body>
+</html>

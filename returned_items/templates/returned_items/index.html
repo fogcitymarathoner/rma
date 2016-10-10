@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load cycle from future %}
+{% block content %}
+    <div class="container">
+        {% if user.is_authenticated %}
+        <div class="page-header">
+            <h1>Returned Items</h1>
+            <p class="lead">Sorted on Date Descending</p>
+        </div>
+        <div class="row list-header">
+            <div class="col-md-1">Date</div>
+            <div class="col-md-1">Quantity</div>
+            <div class="col-md-2">Description</div>
+            <div class="col-md-2">Model Number</div>
+            <div class="col-md-4">Issue</div>
+            <div class="col-md-2">Note</div>
+        </div>
+            <div id="items">
+                {% for i in items %}
+                    <div  class="row {% cycle 'odd-row' 'even-row' %}">
+                        <div class="col-md-1">
+                                <a href="{% url   'view_rma' id=i.rma_id  %}">{{  i.date| date:'m/d/Y'  }}</a>
+                        </div>
+                        <div class="col-md-1">
+                                {{  i.quantity  }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ i.part_description }}
+                        </div>
+                        <div class="col-md-2">
+                            {% if i.part_model_number %}
+                                {{ i.part_model_number }}
+                            {% else %}
+                                &nbsp
+                            {% endif %}
+                        </div>
+                        <div class="col-md-4">
+                            {% if i.issue %}
+                                <a href="{% url   'view_rma' id=i.rma_id  %}">{{  i.issue  }}</a>
+                            {% else %}
+                                &nbsp
+                            {% endif %}
+                        </div>
+                        <div class="col-md-2">
+                                {{  i.note  }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+            <h1>Please Log In</h1>
+        {% endif %}
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            $( "#nav-bar-customers-dropdown" ).removeClass('active');
+            $( "#nav-bar-rma-list-link" ).removeClass('active');
+            $( "#nav-bar-commissioned-sites-link" ).removeClass('active');
+            $( "#nav-bar-list-parts-link" ).removeClass('active');
+            $( "#nav-bar-list-return-items-link" ).addClass('active');
+            $( "#nav-bar-admin-panel-link" ).removeClass('active');
+        });
+    </script>
+{% endblock content %}

@@ -1,0 +1,9 @@
+{% load admin_url %}
+{% load user_group %}
+<li><a id='change-password-nav' href="{% url 'change_password' %}">Change Password</a></li>
+{% if request.user|has_group:"poweruser" %}
+    <li><a id='admin-edit-rma-extra-fields-nav' href="{% url 'admin_rma_extra_fields' %}">RMA Custom Fields</a></li>
+{% endif %}
+{% if request.user|has_group:"admin" %}
+    <li id='django-admin-nav'>{%  admin_panel_url %}</li>
+{% endif %}

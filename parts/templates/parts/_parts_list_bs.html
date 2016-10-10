@@ -1,0 +1,39 @@
+{% load cycle from future %}
+<div class="row list-header">
+    <div  class="row">
+        <div class="col-md-3">Description</div>
+        <div class="col-md-3">Model Number</div>
+        <div class="col-md-3">Official Model Name</div>
+        <div class="col-md-3">Part Number</div>
+    </div>
+</div>
+<div id="rmas">
+    {% for i in parts %}
+        <div  class="row {% cycle 'odd-row' 'even-row' %}">
+            <div class="col-md-3">
+                    <a href="{% url   'view_part' id=i.id  %}">{{  i.description  }}</a>
+            </div>
+            <div class="col-md-3">
+                {% if i.model_number %}
+                    <a href="{% url   'view_part' id=i.id  %}">{{  i.model_number  }}&nbsp</a>
+                {% else %}
+                    &nbsp
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                {% if i.official_model_name %}
+                    <a href="{% url   'view_part' id=i.id  %}">{{  i.official_model_name  }}&nbsp</a>
+                {% else %}
+                    &nbsp
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                {% if i.part_number %}
+                    <a href="{% url   'view_part' id=i.id  %}">{{  i.part_number  }}&nbsp</a>
+                {% else %}
+                    &nbsp
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

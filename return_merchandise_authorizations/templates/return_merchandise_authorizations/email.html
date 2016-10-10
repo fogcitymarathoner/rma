@@ -1,0 +1,51 @@
+{% load phase %}
+{% load shipping_method %}
+<html>
+
+    <body bgcolor="#069">
+        <h1>RMA</h1>
+        {% block approval %}{% endblock %}
+        <h2>Customer Data</h2>
+        <table border="1" style="width:100%">
+            <tr>
+                <td colspan="1"><b>Site</b></td>
+                <td colspan="2" style="font-size: 200%;  color: purple;">{{ rma.customer.name  }}</td>
+                <td colspan="1"><b>Date</b></td>
+                <td colspan="1" style="font-size: 200%;  color: purple;">{{ rma.date | date:"m/d/Y"}}</td>
+            </tr>
+            <tr>
+                <td colspan="1"><b>Contact</b></td>
+                <td colspan="1" style="font-size: 200%;  color: purple;">{{ rma.contact }}</td>
+                <td colspan="1"><b>Phone</b></td>
+                <td colspan="2" style="font-size: 200%;  color: purple;">{{ rma.contact_phone_number }}</td>
+            </tr>
+            <tr>
+                <td colspan="1"><b>Shipping Address</b></td>
+                <td colspan="4" style="font-size: 200%;  color: purple;">{{ rma.address}}</td>
+            </tr>
+            <tr>
+                <td colspan="1"><b>SalesForce Case Number</b></td>
+                <td colspan="1" style="font-size: 200%;  color: purple;">{{ rma.case_number  }}</td>
+                <td colspan="2"><b>RMA Reference Number</b></td>
+                <td colspan="1" style="font-size: 200%;  color: purple;">{{  rma.reference_number  }}</td>
+            </tr>
+            <tr>
+                <td colspan="1"><b>Phase</b></td>
+                <td colspan="4" style="font-size: 200%;  color: purple;">{{  rma| phase }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><b>Shipping Method</b></td>
+                <td colspan="3" style="font-size: 200%;  color: purple;">{{  rma | shipping_method }}</td>
+            </tr>
+        </table>
+
+        <h2>Summary of Issue</h2>
+        <p style="font-size: 150%;  color: purple;">{{ rma.issue | safe }}</p>
+        {% include "return_merchandise_authorizations/_email_view_items.html" %}
+        <h2>Last Modified By</h2>
+        <p style="font-size: 150%;  color: purple;">{{ rma.last_modified_by.username }} - {{ rma.last_modified_by.first }} {{ rma.last_modified_by.last }}</p>
+        <h2>Last Modified on</h2>
+        <p style="font-size: 150%;  color: purple;">{{ rma.last_modified_on }}</p>
+
+    </body>
+</html>

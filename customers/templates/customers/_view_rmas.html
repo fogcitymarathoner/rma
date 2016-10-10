@@ -1,0 +1,22 @@
+{% load cycle from future %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 field-name"><h3>RMAs</h3></div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 field-name">Date</div>
+            <div class="col-md-2 field-name">Reference Number</div>
+            <div class="col-md-4 field-name">Address</div>
+            <div class="col-md-4 field-name">Issue</div>
+        </div>
+        {% for i in rmas %}
+            <div class="row {% cycle 'odd-row' 'even-row' %}">
+                <div class="col-md-2"><a href="{% url   'view_rma' id=i.id  %}">{{  i.date| date:'m/d/Y'  }}</a></div>
+                <div class="col-md-2"><a href="{% url   'view_rma' id=i.id  %}">{{  i.reference_number  }}</a></div>
+                <div class="col-md-4"><a href="{% url   'view_rma' id=i.id  %}">{{  i.address  }}</a></div>
+                <div class="col-md-4"><a href="{% url   'view_rma' id=i.id  %}">{{  i.issue  }}</a></div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

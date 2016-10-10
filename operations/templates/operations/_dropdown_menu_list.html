@@ -1,0 +1,8 @@
+{% load user_group %}
+<li>
+    <a id='move-parts-app-nav-button' href="{% url 'move_parts' %}">Parts</a>
+    <a id='reassign-customers-to-customer-sites-app-nav-button' href="{% url 'reassign_customers_to_customer_sites' %}">Customer RMA Sites</a>
+    {% if request.user|has_group:"admin" %}
+        <a id='manage-user-roles' href="{% url 'manage_users_roles' %}">Manage User Roles</a>
+    {% endif %}
+</li>

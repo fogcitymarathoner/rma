@@ -1,0 +1,20 @@
+<ul class="nav nav-pills nav-stacked">
+    <li id='reports-parts-sidebar-button' class="active">
+        <a href="{% url 'report_parts' %}">Part In Period</a>
+    </li>
+    <li id='reports-parts-all-time-sidebar-button' class="inactive">
+        <a href="{% url 'report_parts_all_time' %}">Part All Time</a>
+    </li>
+    <li id='reports-parts-by-quarter-by-site-sidebar-button' class="inactive">
+        <a href="{% url 'report_parts_by_quarter_by_site' %}">By Quarter By Site</a>
+    </li>
+    <li id='reports-parts-by-part-number-sidebar-button' class="inactive">
+        <a href="{% url 'report_parts_by_part_number' %}">Search On Part Number</a>
+    </li>
+    <li id='reports-parts-in-life-sidebar-button' class="inactive">
+        <a href="{% url 'report_parts_in_life' %}">Parts In Life</a>
+    </li>
+    <li id='reports-parts-out-of-life-sidebar-button' class="inactive">
+        <a href="{% url 'report_parts_out_of_life' %}">Parts Out Of Life</a>
+    </li>
+</ul>

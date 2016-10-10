@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "commissioned_sites/_customer_header.html" %}</div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Manage RMA Attachments</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 16px">
+            {% if request.user|has_group:"user" %}
+                <a class="btn btn-success" id='create-rma-attachment-button' href="{% url 'create_site_attachment' id=site.id %}">Create Commissioned Site Attachment</a>
+            {% endif %}
+
+        </div>
+    </div>
+    {% include "commissioned_sites/_tabs.html" %}
+
+    <div class="tab-content">
+      <div class="tab-pane" id="view"></div>
+      <div class="tab-pane" id="items">
+
+      </div>
+      <div class="tab-pane active" id="attachments">
+
+      </div>
+      <div class="tab-pane active" id="attachments">
+          {% include "commissioned_sites/_manage_attachments.html" %}
+      </div>
+    </div>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('#tabs').tab();
+            $('#site-view-anchor').removeClass('active');
+            $('#site-manage-items').removeClass('active');
+            $('#site-manage-attachments').addClass('active');
+            $('#site-manage-extra-field').removeClass('active');
+        });
+        $(function () {
+            $('a#rma-manage-attachments-anchor').click(function (e) {
+                e.preventDefault();
+            });
+
+        })
+    </script>
+
+    <script src="{{ STATIC_URL }}/commissioned_sites/js/fix_navs.js"></script>
+{% endblock content %}

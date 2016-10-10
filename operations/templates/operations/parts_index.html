@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load cycle from future %}
+{% block content %}
+    <div class="container">
+        {% if user.is_authenticated %}
+        <div class="page-header">
+            <h1>Parts List</h1>
+            <p>Use this app to move/consolidate parts and returned items</p>
+        </div>
+        <div class="row list-header">
+            <div class="col-md-6">Count/Description</div>
+            <div class="col-md-6">Model Number</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="rmas">
+                    {% for i in parts %}
+                        <div  class="row {% cycle 'odd-row' 'even-row' %}">
+                            <div class="col-md-6">
+                                    <a href="{% url   'view_part_to_move' id=i.id  %}">{{ i.count }}&nbsp;{{  i.description  }}</a>
+                            </div>
+                            <div class="col-md-6">
+                                {% if i.model_number %}
+                                    <a href="{% url   'view_part_to_move' id=i.id  %}">{{  i.model_number  }}&nbsp</a>
+                                {% else %}
+                                    &nbsp
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+        </div>
+        {% else %}
+            <h1>Please Log In</h1>
+        {% endif %}
+    </div>
+
+    <script src="{{ STATIC_URL   }}js/operations.js"></script>
+{% endblock content %}

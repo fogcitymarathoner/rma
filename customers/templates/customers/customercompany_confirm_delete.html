@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form id="delete-customer-site" action="" method="post">{% csrf_token %}
+        <p>Are you sure you want to delete customer - "{{ object }}"?</p>
+        <input type="submit" value="Confirm" />
+    </form>
+    <a href="{% url 'view_customer' id=object.id %}">CANCEL</a>
+</body>
+</html>

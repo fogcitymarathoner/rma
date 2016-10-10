@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load cycle from future %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+        {% if user.is_authenticated %}
+            <div class="page-header">
+                <h1>Parts List</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="margin-bottom: 16px">
+                    {% if request.user|has_group:"user" %}
+                        <a id='create-part-button' class="btn btn-success" href="{% url 'create_part'  %}">New</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% include "parts/_parts_list_bs.html" %}
+        {% else %}
+            <h1>Please Log In</h1>
+        {% endif %}
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            $( "#nav-bar-rma-list-link" ).removeClass('active');
+            $( "#nav-bar-customers-dropdown" ).removeClass('active');
+            $( "#nav-bar-commissioned-sites-link" ).removeClass('active');
+            $( "#nav-bar-list-parts-link" ).addClass('active');
+            $( "#nav-bar-list-return-items-link" ).removeClass('active');
+            $( "#nav-bar-admin-panel-link" ).removeClass('active');
+        });
+    </script>
+{% endblock content %}

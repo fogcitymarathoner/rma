@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 field-name"><h3>Networks</h3></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 field-name">Wireless Network Name</div>
+            <div class="col-md-4 field-name">SSID</div>
+            <div class="col-md-4 field-name">Energy Manager IP Address</div>
+        </div>
+        {% for i in networks %}
+            <div class="row">
+                <div class="col-md-4">{{  i.wireless_network_name  }}</div>
+                <div class="col-md-4">{{  i.ssid  }}</div>
+                <div class="col-md-4">{{  i.energy_manager_ip_address  }}</div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

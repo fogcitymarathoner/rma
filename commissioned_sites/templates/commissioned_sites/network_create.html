@@ -1,0 +1,13 @@
+{% extends "base_form.html" %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "commissioned_sites/_customer_header.html" %}</div>
+    <h1>Create Site Network</h1>
+    <form action="" method="post">{% csrf_token %}
+        <table>
+            {% include "commissioned_sites/_network_form.html" %}
+        </table>
+        <input class="btn primary" type="submit" value="Save Network" />
+        <a  class="btn btn-success back" href="#">CANCEL</a>
+    </form>
+{% endblock content %}

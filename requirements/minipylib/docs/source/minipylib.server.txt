@@ -1,0 +1,171 @@
+.. _server:
+
+minipylib.server
+================
+
+.. automodule:: minipylib.server
+    :show-inheritance:
+
+
+Classes, Functions & Constants
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Web server configuration helpers
+--------------------------------
+
+.. autoclass:: ServerConfig
+    :show-inheritance:
+
+
+.. autofunction:: get_server_config
+
+
+
+Server registry functions
+-------------------------
+
+.. data:: DEFAULT_SERVER
+
+    Default server is `wsgiserver` (CherryPy `wsgiserver`).
+
+.. autofunction:: register_server
+
+.. autofunction:: get_server
+
+.. autofunction:: get_server_list
+
+.. autofunction:: get_web_server
+
+
+Server template
+---------------
+
+.. autoclass:: Server
+    :show-inheritance:
+
+    .. automethod:: run
+
+    .. automethod:: stop
+
+
+Server adaptors
+---------------
+
+.. autoclass:: SimpleServer
+    :show-inheritance:
+
+
+.. autoclass:: WsgiServer
+    :show-inheritance:
+
+
+.. class:: CherryPyServer
+
+    Run server using CherryPy wsgiserver
+    
+    :source: http://www.cherrypy.org/
+
+
+.. class:: FapwsServer
+
+    FAPWS3 (Fast Asynchronous Python Web Server)
+
+    :source: http://www.fapws.org/
+    :source: https://github.com/william-os4y/fapws3
+
+
+.. class:: UwsgiServer
+
+    uWSGI: fast (pure C), self-healing, developer-friendly WSGI server
+
+    :source: http://projects.unbit.it/uwsgi/
+
+
+.. class:: EventletServer
+
+    Linden Lab eventlet
+
+    :source: http://eventlet.net/
+
+
+.. class:: GeventPYWsgiServer
+
+    gevent.pywsgi.WSGIServer
+
+    :source: http://www.gevent.org/
+
+
+.. class:: BjoernServer
+
+    bjoern
+
+    :source: https://github.com/jonashaag/bjoern
+
+
+Helper wsgi apps
+----------------
+
+.. function:: test_app
+
+    `test_app` is `demo_app` from the Python standard ``wsgiref.simple_server`` module.
+
+    If ``wsgiref.simple_server`` can not be imported, `test_app` defaults to:
+
+    Simplest possible application object
+
+    * from PEP 333 - `http://www.python.org/dev/peps/pep-0333/ <http://www.python.org/dev/peps/pep-0333/>`_
+
+
+.. autofunction:: get_django_app
+
+
+Utility functions
+-----------------
+
+.. autofunction:: change_uid_gid
+
+
+.. autofunction:: get_uid_gid
+
+
+
+Webserver class to initialize and run server
+--------------------------------------------
+
+.. autoclass:: Webserver
+
+    .. automethod:: run
+
+    .. automethod:: stop
+
+
+
+Constants
+---------
+
+.. data:: DEFAULT_SERVER
+
+    Default server is `wsgiserver` (CherryPy `wsgiserver`).
+
+.. data:: DEFAULT_SERVER_HOST
+
+    Default server host is `127.0.0.1`.
+
+.. data:: DEFAULT_SERVER_PORT
+
+    Default server port is `8080`.
+
+.. data:: DEFAULT_SERVER_USER
+
+    Default server user is `nobody`.
+
+.. data:: DEFAULT_SERVER_GROUP
+
+    Default server group is `nobody`.
+
+.. data:: DEFAULT_THREADS
+
+    This is the default number of threads for CherryPy's `wsgiserver`. Default is 10.
+
+

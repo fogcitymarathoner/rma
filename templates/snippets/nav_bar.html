@@ -1,0 +1,92 @@
+{% load user_group %}
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Enlighted</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li id="nav-bar-rma-list-link" class="active"><a href="{% url 'home_page' %}">RMA</a></li>
+        <li id="nav-bar-customers-dropdown" class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Customer Data
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                {% include "customers/_dropdown_menu_list.html" %}
+            </ul>
+        </li>
+        <li id="nav-bar-list-parts-link"><a href="{% url 'list_parts' %}">Parts</a></li>
+        <li id="nav-bar-list-return-items-link"><a href="{% url 'list_returned_items' %}">Returned Items</a></li>
+        <li id="nav-bar-reports-dropdown" class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Reports
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                {% include "reports/_dropdown_menu_list.html" %}
+            </ul>
+        </li>
+        {% if request.user|has_group:"user" %}
+            <li id="nav-bar-operations-dropdown" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Operations
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    {% include "operations/_dropdown_menu_list.html" %}
+                </ul>
+            </li>
+        {% endif %}
+            <li id="nav-bar-admin-dropdown" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Administration
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    {% include "operations/_admin_dropdown_menu_list.html" %}
+                </ul>
+            </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+                <style>
+                    button.btn.primary {margin-top: 5px;}
+                    button.btn.primary A {
+                        z-index: 99;
+                    }
+                </style>
+                <li>
+                    <span class='welcome-name'>Welcome {{  user.username }}!</span>
+                </li>
+                <li>
+                <form method="post" class="pull-right" action='{% url 'rma_logout' %}'>
+                  {% csrf_token %}
+                    <button class="btn primary" type="submit"><a href="{% url 'rma_logout' %}">Logout</a></button>
+                </form>
+                </li>
+            {% else %}
+                <li>
+                    <form id='login-form' method="post" class="pull-right" action='{% url 'rma_login' %}'>
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input class="input-small"  id="id_username"  name="username" type="text"  placeholder="Username"/>
+                            <input class="input-small"  id="id_password"  name="password" type="password"  placeholder="Password"/>
+                            <input id="id_next" name="next" type="hidden" value="{% url 'home_page' %}"/>
+                        <button class="btn" type="submit">Sign in</button>
+                        </div>
+                    </form>
+                </li>
+            {% endif %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

@@ -1,0 +1,21 @@
+{% extends "base_form.html" %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "customers/_customer_edit_header.html" %}</div>
+        <form id="edit-customer" action="" method="post">{% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input class="btn primary btn-success" type="submit" value="Save Customer" />
+            <button class="btn primary btn-warning" type="submit" id="customer-edit-cancel-button">CANCEL</button>
+        </form>
+    </div>
+    <script type="text/javascript">
+        var cancel_url = "{% url 'view_customer' id=customercompany.id  %}";
+        $('#customer-edit-cancel-button').click(function(e) {
+            window.location.replace(cancel_url);
+            e.preventDefault()
+        });
+    </script>
+    <script src="{{ STATIC_URL }}customers/js/customers.js"></script>
+{% endblock content %}

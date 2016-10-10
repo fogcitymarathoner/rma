@@ -1,0 +1,17 @@
+
+        <div class="row">
+            <div class="col-md-12 field-name"><h3>Items</h3></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 field-name">Name</div>
+            <div class="col-md-4 field-name">Quantity</div>
+            <div class="col-md-4 field-name">Model Number</div>
+        </div>
+        {% for i in items %}
+            <div class="row">
+                <div class="col-md-4">{{  i.name  }}</div>
+                <div class="col-md-4">{{  i.quantity  }}</div>
+                <div class="col-md-4">{{  i.model_number  }}</div>
+            </div>
+        {% endfor %}
+

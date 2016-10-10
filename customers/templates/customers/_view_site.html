@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 field-name"><h3>Customer Data</h3></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4 field-name">Customer Name</div>
+                    <div class="col-md-8 data"> {{  customer.customer.company_name  }}</div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4 field-name">Site Name</div>
+                    <div class="col-md-8 data"> {{  customer.name  }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 field-name-small">Last Modified By {{ user.username }} - {{ user.username.first }} {{ user.username.last }}</div>
+        </div>
+    </div>
+</div>

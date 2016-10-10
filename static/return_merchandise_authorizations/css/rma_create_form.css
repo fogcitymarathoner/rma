@@ -1,0 +1,6 @@
+/* hide fields used by javascript */
+input#id_customer { display: none}
+label[for=id_customer]{ display: none}
+
+select#id_name { display: none}
+label[for=id_name]{ display: none}

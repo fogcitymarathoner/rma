@@ -1,0 +1,5 @@
+Items
+
+    {% for i in items %}
+        {{  i.part.description  }} {{  i.quantity  }} {{  i.part.model_number  }} {{  i.note  }}
+    {% endfor %}

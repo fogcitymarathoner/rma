@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                {% include "reports/_parts_sidebar.html" %}
+            </div>
+            <div class="col-md-8">
+                <div class="page-header">{% include "reports/_parts_header.html" %}</div>
+                <form action="" method="post">{% csrf_token %}
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+                </form>
+                <div id="parts-results">
+                    {% include "parts/_parts_list_bs.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ STATIC_URL }}return_merchandise_authorizations/js/report_parts.js"></script>
+    <script src="{{ STATIC_URL }}reports/js/reports.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $( "#reports-parts-sidebar-button" ).removeClass('active');
+            $( "#reports-parts-all-time-sidebar-button" ).removeClass('active');
+            $( "#reports-parts-by-part-number-sidebar-button" ).removeClass('active');
+            $( "#reports-parts-by-quarter-by-site-sidebar-button" ).removeClass('active');
+            {% if in_life %}
+                $( "#reports-parts-in-life-sidebar-button" ).addClass('active');
+                $( "#reports-parts-out-of-life-sidebar-button" ).removeClass('active');
+            {% else %}
+                $( "#reports-parts-in-life-sidebar-button" ).removeClass('active');
+                $( "#reports-parts-out-of-life-sidebar-button" ).addClass('active');
+            {% endif %}
+        });
+    </script>
+{% endblock content %}

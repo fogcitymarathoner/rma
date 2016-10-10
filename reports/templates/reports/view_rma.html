@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "return_merchandise_authorizations/_customer_header.html" %}</div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>View RMA</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 16px">
+            <a class="btn btn-success" id='delete-rma-button' href="{% url 'show_sites_rmas' id=rma.customer.id  %}">BACK</a>
+        </div>
+    </div>
+
+    {% include "return_merchandise_authorizations/_view.html" %}
+
+
+    <script src="{{ STATIC_URL }}reports/js/reports.js"></script>
+{% endblock content %}

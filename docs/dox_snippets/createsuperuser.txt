@@ -1,0 +1,7 @@
+crm@crm1:~$ cd python_apps/django/rma_test
+crm@crm1:~/python_apps/django/rma_test$ python manage.py createsuperuser
+Username: quentin
+Email address: q@enlighted.com
+Password:
+Password (again):
+Superuser created successfully.

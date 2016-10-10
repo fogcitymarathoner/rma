@@ -1,0 +1,33 @@
+{% extends "base_form.html" %}
+{% block content %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}return_merchandise_authorizations/css/rma_create_form.css">
+    <div class="container">
+        <div class="page-header">{% include "return_merchandise_authorizations/_customer_header_new_rma.html" %}</div>
+        {% if msg != '' %}
+            <p class='error-message'>{{ msg |safe}}</p>
+        {% endif %}
+        <form id="create-rma-with-an-existing-customer" action="" method="POST">{% csrf_token %}
+            <table>
+                {% include "return_merchandise_authorizations/_autocomplete_fields/_customer.html" %}
+                {{ customer_form.as_table }}
+                {{ form.as_table }}
+            </table>
+            {% include "return_merchandise_authorizations/_add_item_form.html" %}
+            <input class="btn primary btn-success" id='submit-create-rma-selected-site' type="submit" value="Save RMA" />
+            <button class="btn primary btn-warning" type="submit" id="rma-create-cancel-button">CANCEL</button>
+        </form>
+    </div>
+    <script>
+        var cancel_url = "{% url 'home_page' %}";
+        $('#rma-create-cancel-button').click(function(e) {
+            window.location.replace(cancel_url);
+            e.preventDefault()
+        });
+        var returned_item_form_url = '{{ sub_url }}services/numbered_return_item_form/';
+        var customers_sites_dropdown_url = '/{{ sub_url }}services/customers_sites_dropdown/';
+        var customers_service_url = '{{ customers_service_url }}';
+    </script>
+    <script src="{{ STATIC_URL   }}return_merchandise_authorizations/js/rma_create.js"></script>
+    <script src="{{ STATIC_URL   }}return_merchandise_authorizations/js/highlight.js"></script>
+    <script src="{{ STATIC_URL   }}return_merchandise_authorizations/js/rma-customers-autocomplete.js"></script>
+{% endblock content %}

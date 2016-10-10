@@ -1,0 +1,4 @@
+include INSTALL
+include LICENSE
+include CHANGES
+global-exclude .DS_Store *.hgignore *.hgtags *_hgignore.txt

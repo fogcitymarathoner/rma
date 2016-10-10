@@ -1,0 +1,49 @@
+{% load cycle from future %}
+<h1>Returned Item Counts for</h1>
+<h2>{{ quarter }} Quarter of {{ year }}</h2>
+<table>
+<tr class="list-header">
+    <th>Site Name</th>
+    <th>Part Description</th>
+    <th>Part Model</th>
+    <th>Part Number</th>
+    <th>Count</th>
+</tr>
+    {% for sp in site_parts %}
+    <tr class="{% cycle 'odd-row' 'even-row' %}">
+        <td>{{ sp.site }}</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+    </tr>
+        {% for p in sp.parts %}
+            <tr>
+                <td>&nbsp</td>
+                <td>{{ p.part.description }}</td>
+                <td>{{ p.part.model_number }}</td>
+                <td>{{ p.part_number }}</td>
+                <td>{{ p.count }}</td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+</table>
+<h3>In Summary</h3>
+<table>
+    <tr class="list-header">
+        <th>Part Description</th>
+        <th>Model Number</th>
+        <th>Part Number</th>
+        <th>Count</th>
+    </tr>
+    {% for p in summary %}
+    <tr class="{% cycle 'odd-row' 'even-row' %}">
+        <td>{{ p.part.description }}</td>
+        <td>{{ p.part.model_number }}</td>
+        <td>{{ p.part.part_number }}</td>
+
+        <td>{{ p.count }}</td>
+    </tr>
+
+    {% endfor %}
+</table>

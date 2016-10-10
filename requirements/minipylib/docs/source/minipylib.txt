@@ -1,0 +1,32 @@
+.. _minipylib:
+
+minipylib
+=========
+
+.. automodule:: minipylib
+	:show-inheritance:
+
+
+Authors
+~~~~~~~
+
+* Kevin Chan <kefin@makedostudio.com>
+	
+
+Classes, Functions & Constants
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. data:: VERSION
+
+	Version number for minipylib.
+
+
+.. data:: DESCRIPTION
+
+	Description of minipylib.
+
+
+.. data:: AUTHORS
+
+	Minipylib authors.
+

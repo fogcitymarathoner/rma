@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-md-12">
+        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+            <li id="rma-view-anchor" class="active"><a href="{% url 'view_rma' id=rma.id %}">View</a></li>
+            <li id="rma-manage-items" ><a href="{% url 'manage_items' id=rma.id %}">Manage Items</a></li>
+            <li id='rma-manage-attachments'><a href="{% url 'manage_attachments' id=rma.id %}">Manage Attachments</a></li>
+            <li id='rma-manage-extra-fields'><a href="{% url 'manage_extra_fields' id=rma.id %}">Extra</a></li>
+        </ul>
+    </div>
+</div>

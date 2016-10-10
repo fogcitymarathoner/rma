@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                {% include "reports/_parts_sidebar.html" %}
+            </div>
+            <div class="col-md-8">
+                <div class="page-header">{% include "reports/_parts_header.html" %}</div>
+                <form action="" method="post">{% csrf_token %}
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+                </form>
+                <div id="parts-results"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var services_parts_by_part_url = '{{ sub_url }}services/returned_part_by_part_number_report/';
+        /* change event here to avoid conflict with #id_part change event with other goto reports in reports.js */
+        $('#id_part').change(function (e) {
+            part_id = $("select#id_part").val();
+
+            url = '/'+services_parts_by_part_url+part_id+'/';
+            // start spinner
+            $('#wait-area').addClass( 'waiting div400x100' );
+            $.get( url, function( data ) {
+                $('div#parts-results').html(data);
+            });
+            // stop spinner
+            $('#wait-area').removeClass( 'waiting div400x100' );
+            e.preventDefault();
+        });
+
+    </script>
+    <script src="{{ STATIC_URL }}return_merchandise_authorizations/js/report_parts.js"></script>
+
+    <script src="{{ STATIC_URL }}reports/js/reports.js"></script>
+    <script type="text/javascript">
+        $(function() {
+
+            $( "#reports-parts-sidebar-button" ).removeClass('active');
+            $( "#reports-parts-all-time-sidebar-button" ).removeClass('active');
+            $( "#reports-parts-by-part-number-sidebar-button" ).addClass('active');
+            $( "#reports-parts-by-quarter-by-site-sidebar-button" ).removeClass('active');
+            $( "#reports-parts-in-life-sidebar-button" ).removeClass('active');
+            $( "#reports-parts-out-of-life-sidebar-button" ).removeClass('active');
+        });
+    </script>
+{% endblock content %}

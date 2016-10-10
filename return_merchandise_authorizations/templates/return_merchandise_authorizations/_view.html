@@ -1,0 +1,110 @@
+{% load phase %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 field-name"><h3>Customer Data</h3></div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4 field-name">Account Name</div>
+                    <div class="col-md-8 data">{{ rma.customer }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 field-name">Contact Name</div>
+                    <div class="col-md-8 data">
+                        {{ rma.contact}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 field-name">Phone Number</div>
+                    <div class="col-md-8 data">
+                        {{ rma.contact_phone_number}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 field-name">Shipping Address</div>
+                    <div class="col-md-8 data">
+                        {{ rma.address}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4 field-name-small">SalesForce Case Number</div>
+                    <div class="col-md-8 data">
+                        {{ rma.case_number }}
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4 field-name">Date</div>
+
+                    <div class="col-md-8 data">
+                        {{ rma.date   |date:"m/d/Y"}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 field-name-small">RMA Reference Number</div>
+                    <div class="col-md-8 data" id="rma=reference-number">
+                        {{ rma.reference_number }}
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4 field-name">Phase</div>
+                    <div class="col-md-8 data">
+                        {{ rma| phase }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 field-name"><h3>Summary of Issue</h3></div>
+            <div class="col-md-8 data">
+                {{ rma.issue | safe }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 field-name"><h3>Repair Costs</h3></div>
+            <div class="col-md-8 data">
+                ${{ rma.repair_costs | safe }}
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12 field-name"><h3>Shipping</h3></div>
+        </div>
+        <div class="row">
+                <div class="col-md-3 field-name">Shipping Method</div>
+                <div class="col-md-9 data">{{ rma.shipping }}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 field-name" >Outbound Tracking Number</div>
+            <div class="col-md-9 data">{{ rma.outbound_tracking_number }}</div>
+        </div>
+        <div class="row">
+                <div class="col-md-3 field-name">Return Tracking Number</div>
+                <div class="col-md-9 data">
+                    {{ rma.return_tracking_number }}
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 field-name"><h3>Root Cause Analysis</h3></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 field-name">{{ rma.root_cause_analysis }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12  field-name">Last Modified By {{ rma.last_modified_by.username }} - {{ rma.last_modified_by.first }} {{ rma.last_modified_by.last }}</div>
+        </div>
+        <div class="row" id="last-modified-on">
+            <div class="col-md-12  field-name">Last Modified on {{ rma.last_modified_on }}</div>
+        </div>
+        {% include "return_merchandise_authorizations/_view_items.html" %}
+        {% include "return_merchandise_authorizations/_view_attachments.html" %}
+
+
+    </div>
+</div>

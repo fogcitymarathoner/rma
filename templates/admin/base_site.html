@@ -1,0 +1,18 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+{% endblock %}
+
+{% block nav-global %}
+    {% if user.is_active and user.is_staff %}
+    <div class="nav-global-container">
+        <div class="nav-global">
+            {{ settings.ADMIN_NAV_LINKS| safe }}
+            <div style="clear: both"></div>
+        </div><!-- nav-global -->
+    </div><!-- nav-global-container -->
+    {% endif %}
+{% endblock %}

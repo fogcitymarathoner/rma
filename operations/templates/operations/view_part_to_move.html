@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+    <div class="page-header"><h1>View Part Details</h1></div>
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 16px">
+            <a class="btn btn-success" href="{% url 'edit_part_ops' id=part.id  %}">Edit</a>
+            <a class="btn btn-success" href="{% url 'move_parts' %}">Select Another Part to Move</a>
+            {% if item_count == 0 %}
+                    <a class="btn btn-success" href="{% url 'delete_part_ops' id=part.id  %}">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+    {% include "operations/_part_view.html" %}
+<script type="text/javascript">
+
+    jQuery(document).ready(function ($) {
+
+        $('#move-parts-button').click(
+            function(e) {
+                count = $('input[type="checkbox"]:checked').length;
+                if (count == 0) {
+                    alert("Please select some items to move");
+                    e.preventDefault()
+                } else {
+                    return;
+                }
+            }
+        );
+    });
+
+    $(function() {
+        $( "#nav-bar-rma-list-link" ).removeClass('active');
+        $( "#nav-bar-commissioned-sites-link" ).removeClass('active');
+        $( "#nav-bar-list-parts-link" ).removeClass('active');
+        $( "#nav-bar-list-return-items-link" ).removeClass('active');
+        $( "#nav-bar-admin-panel-link" ).removeClass('active');
+        $( "#nav-bar-reports-dropdown" ).removeClass('active');
+        $( "#nav-bar-operations-dropdown" ).addClass('active');
+    });
+</script>
+{% endblock content %}

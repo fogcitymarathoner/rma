@@ -1,0 +1,20 @@
+{% extends "base_form.html" %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "commissioned_sites/_customer_header.html" %}</div>
+    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input class="btn primary" type="submit" value="Save Site Attachment" />
+        <a  class="btn btn-success back" href="#">CANCEL</a>
+    </form>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('a.back').click(function(){
+                parent.history.back();
+                return false;
+            });
+        });
+    </script>
+{% endblock content %}

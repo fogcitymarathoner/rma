@@ -1,0 +1,32 @@
+{% load phase %}
+{{ username }} just created an RMA.
+Customer Data
+Customer Name
+{{  rma.customer.name  }}
+Contact
+{{  rma.contact}}
+Contact Phone
+{{  rma.contact_phone_number}}
+Address
+{{  rma.address}}
+SalesForce Case Number
+{{  rma.case_number  }}
+Date
+{{  rma.date  | safe |date:"m/d/Y"}}
+Reference Number
+{{  rma.reference_number  }}
+Phase
+{{  rma| phase }}
+Summary of Issue
+{{  rma.issue | safe }}
+Outbound Tracking Number
+{{  rma.outbound_tracking_number }}
+Shipping Method
+{{  rma.shipping }}
+Return Tracking Number
+{{  rma.return_tracking_number }}
+Root Cause Analysis
+{{  rma.root_cause_analysis  }}
+{% include "return_merchandise_authorizations/_email_view_items.txt" %}
+Last Modified By {{ rma.last_modified_by.username }} - {{ rma.last_modified_by.first }} {{ rma.last_modified_by.last }}
+Last Modified on {{ rma.last_modified_on }}

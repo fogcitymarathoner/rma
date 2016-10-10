@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 field-name"><h3>Attachments</h3></div>
+        </div>
+        {% for i in attachments %}
+            <div class="row">
+                <a href="{% url 'download_rma_attachment'   i.id  %}">{{  i.file  }}</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>

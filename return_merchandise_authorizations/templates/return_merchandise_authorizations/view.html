@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load sharepoint_rma_url %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+        <div class="page-header">{% include "return_merchandise_authorizations/_customer_header_manage_rma.html" %}</div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Manage RMA</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div id="manage-rma" class="col-md-12" style="margin-bottom: 16px">
+                {% if request.user|has_group:"user" %}
+                    <a class="btn btn-success" id='edit-rma-button' href="{% url 'edit_rma' id=rma.id  %}">Edit</a>
+                {% endif %}
+                {%  if rma.approved == 1 %}
+                    {% if request.user|has_group:"approver" %}
+                        <a class="btn btn-success" id='approve-rma-button' href="{% url 'approve_rma' id=rma.id  %}">Approve</a>
+                    {% else %}
+                        Needs Approval
+                    {% endif %}
+                {% else %}
+                    <div class="btn btn-warning">Approved</div>
+                {% endif %}
+                {% if request.user|has_group:"poweruser" %}
+                    <a class="btn btn-success" id='delete-rma-button' href="{% url 'delete_rma' id=rma.id  %}">Delete</a>
+                {% endif %}
+                {% if rma.sharepoint_origin == 2 %}
+                    {{ rma | share_point_rma_url |safe }}
+                {% endif %}
+
+            </div>
+        </div>
+        {% include "return_merchandise_authorizations/_tabs.html" %}
+        <div class="tab-content">
+          <div class="tab-pane active" id="view">
+              {% include "return_merchandise_authorizations/_view.html" %}
+          </div>
+          <div class="tab-pane" id="items"> Your Messages tab content here </div>
+          <div class="tab-pane" id="attachments">Your Settings tab content here</div>
+          <div class="tab-pane" id="extra-fields">Your Settings tab content here</div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('#tabs').tab();
+            $('#rma-view-anchor').addClass('active');
+            $('#rma-manage-items').removeClass('active');
+            $('#rma-manage-attachments').removeClass('active');
+            $('#rma-manage-extra-field').removeClass('active');
+        });
+        $(function () {
+            $('a#rma-view-anchor').click(function (e) {
+                e.preventDefault();
+            });
+        });
+
+    /* dont add back button if comming in from edit or create pages */
+    if (document.referrer.search('rma\/$') > -1){
+        $("#manage-rma").append('<a class="btn primary btn-warning" id="back-button" href="javascript:history.go(-1)">BACK</a>');
+    }
+    </script>
+{% endblock content %}

@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-md-4 field-name">Description</div>
+    <div class="col-md-8 data"> {{  part.description  }}</div>
+</div>
+<div class="row">
+    <div class="col-md-4 field-name">Note</div>
+    <div class="col-md-8 data">
+        {{  part.note}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 field-name">Model Number</div>
+    <div class="col-md-8 data">
+        {{  part.model_number }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 field-name">Official Part Name</div>
+    <div class="col-md-8 data">
+        {{  part.official_model_name }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 field-name">Part Number</div>
+    <div class="col-md-8 data">
+        {{  part.part_number }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 field-name">End of Life</div>
+    <div class="col-md-8 data">
+        {% if part.end_of_life == 1 %}
+        NO
+        {% else %}
+        YES
+        {% endif %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 field-name-small">Last Modified By {{ user.username }} - {{ user.username.first }} {{ user.username.last }}</div>
+</div>

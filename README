@@ -1,0 +1,58 @@
+Running here http://fogtest.com/crm_test/
+
+SSL does not work.
+
+Services for autocompletion go to a CherryPy process exposing a Redis cache
+
+Service 1 - Autocomplete
+========================
+CherryPy
+--------
+On http://fogtest.com/crm_test/ , where it says 'Enter a few letters of customer name or site name '
+
+type either 'att' or 'abb', to do autocompletes on customer names,
+
+Those strings will make service calls to 
+http://fogtest.com/customers_test/?term=att
+and
+http://fogtest.com/customers_test/?term=abb
+
+These are to python micro-framework querying a Redis cache
+
+Service 2 - Autocomplete
+========================
+CherryPy
+--------
+
+goto http://fogtest.com/crm_test/rma/create/
+
+in field 'Customer*', type 'abb'
+
+This will call service
+http://fogtest.com/customers_test/rma_customer_dropdown_service/?term=abb
+
+Services for reports go through Django
+
+Service 3
+=========
+Django
+--------
+
+While logged in goto 
+
+http://fogtest.com/crm_test/rma/edit/1796
+
+Change value of 'Customer Company' from "ATT" to "Abbot Labs"
+
+This calls the service 
+http://fogtest.com/crm_test/services/customers_sites_dropdown/6/
+
+Service 4
+=========
+Django
+------
+go to this page 
+http://fogtest.com/crm_test/reports/parts/
+Run the report on the default inputs.
+Calls this service
+http://fogtest.com/crm_test/services/returned_part_in_period_report/1653/2015/jan/01/2015/dec/31/

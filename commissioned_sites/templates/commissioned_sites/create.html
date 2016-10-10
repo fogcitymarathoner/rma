@@ -1,0 +1,21 @@
+{% extends "base_form.html" %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "commissioned_sites/_customer_header_new_site.html" %}</div>
+    {% if msg != '' %}
+        <p class='error-message'>{{ msg |safe}}</p>
+    {% endif %}
+    <form id="create-rma-with-an-existing-customer" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        {% include "commissioned_sites/_add_network_form.html" %}
+        <input class="btn primary" type="submit" value="Save Site" />
+        <button class="btn primary" type="submit"><a href="{% url 'commissioned_sites'   %}">CANCEL</a></button>
+    </form>
+    <script>
+        var returned_item_form_url = '{{ sub_url }}services/numbered_return_item_form/';
+        var new_trouble_ticket_url = '{{ sub_url }}trouble_ticket/create/';
+    </script>
+    <script src="{{ STATIC_URL   }}return_merchandise_authorizations/js/rma_edit.js"></script>
+{% endblock content %}

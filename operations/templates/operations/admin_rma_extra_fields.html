@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load cycle from future %}
+{% block content %}
+
+
+<script src="{{ STATIC_URL   }}js/jquery.tablednd.js"></script>
+    <div class="container">
+
+        {% if user.is_authenticated %}
+            <div class="page-header">
+                <h1>Return Merchandise Authorizations - Extra Data Fields</h1>
+                <p class="lead">User Defined Fields</p>
+                {% if message %}
+                    <p class="error-message">{{ message }}</p>
+                {% endif %}
+            </div>
+            <form method="POST">{% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="fields">
+                            <div  class="row">
+                            <table id="keyword-table" border="1">
+                            {% for i in fields %}
+                                    <tr class="{% cycle 'odd-row' 'even-row' %}">
+                                            <td><input type='text' name="{{ i.key }}" value="{{ i.value }}"></td>
+                                    </tr>
+                            {% endfor %}
+                            </table>
+                            </div>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="margin-bottom: 16px">
+                        <button class="btn primary btn-warning" id='add-extra-field'>Add New Field</button>
+                    </div>
+                    <div class="col-md-12" style="margin-bottom: 16px">
+                        <button class="btn primary btn-warning" id='add-extra-field'>Save Extra Data Field Names</button>
+                    </div>
+                </div>
+                <input type='hidden' id='new_field' name="new_field" label="new_field" value="no">
+            </form>
+        {% else %}
+            <h1>Please Log In</h1>
+        {% endif %}
+    </div>
+    <script src="{{ STATIC_URL   }}js/rma_extrafields.js"></script>
+
+{% endblock content %}

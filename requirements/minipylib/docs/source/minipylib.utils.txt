@@ -1,0 +1,115 @@
+.. _utils:
+
+minipylib.utils
+===============
+
+.. automodule:: minipylib.utils
+	:show-inheritance:
+
+
+Classes, Functions & Constants
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: add_to_sys_path
+
+.. autofunction:: import_module
+
+.. autofunction:: import_module_vars
+
+.. autofunction:: import_module_settings
+
+.. autofunction:: get_instance
+
+
+.. autofunction:: get_file_contents
+
+.. data:: default_encoding
+
+	Default encoding used by ``get_file_contents`` and ``write_file``::
+	
+		default_encoding = "utf-8"
+
+.. autofunction:: write_file
+
+.. autofunction:: delete_file
+
+.. autofunction:: uri_to_list
+
+
+.. autoclass:: DataObject
+	:show-inheritance:
+
+	.. automethod:: __init__
+
+	.. automethod:: __getattr__
+
+	.. automethod:: __setattr__
+
+	.. automethod:: __delattr__
+
+	.. automethod:: __repr__
+
+	.. automethod:: add
+
+
+
+.. autoclass:: Config
+	:show-inheritance:
+
+	.. automethod:: __init__
+
+	.. automethod:: add_namespace
+
+	.. automethod:: get_namespace
+
+	.. automethod:: update_namespace
+
+	.. automethod:: delete_namespace
+
+	.. automethod:: set_adhoc_namespace
+
+	.. automethod:: setvar
+
+	.. automethod:: getvar
+
+	.. automethod:: set
+
+	.. automethod:: get
+
+	.. automethod:: update
+
+
+.. autofunction:: safe_unicode
+.. autofunction:: safe_str
+
+	:More info: `<http://code.activestate.com/recipes/466341-guaranteed-conversion-to-unicode-or-byte-string/>`_
+
+	::
+	
+		{{{ Recipe 466341 (r1): Guaranteed conversion to unicode or byte string 
+	
+
+.. autofunction:: create_log
+
+.. data:: log_levels
+
+	Logging levels::
+	
+		log_levels = {
+					'notset': logging.NOTSET,
+					'debug': logging.DEBUG,
+					'info': logging.INFO,
+					'warning': logging.WARNING,
+					'error': logging.ERROR,
+					'critical': logging.CRITICAL
+				}
+		
+
+.. data:: log_fmt
+
+ 	Default log format::
+
+		log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+
+

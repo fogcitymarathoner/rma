@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-md-12">
+        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+            <li  id="site-view-anchor" class="active"><a href="{% url 'view_site' id=site.id %}">View</a></li>
+            <li id="site-manage-networks" ><a href="{% url 'site_manage_networks' id=site.id %}">Manage Networks</a></li>
+            <li id='site-manage-attachments'><a href="{% url 'site_manage_attachments' id=site.id %}">Manage Attachments</a></li>
+            <li id='site-manage-extra-fields'><a href="{% url 'site_manage_extra_fields' id=site.id %}">Extra</a></li>
+        </ul>
+    </div>
+</div>

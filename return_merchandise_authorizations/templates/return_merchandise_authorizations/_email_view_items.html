@@ -1,0 +1,19 @@
+<h2>Items</h2>
+<table border="1" style="width:100%">
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Model Number</th>
+        <th>Part Number</th>
+        <th>Notes</th>
+    </tr>
+    {% for i in items %}
+        <tr>
+            <td style="font-size: 200%;  color: purple;">{{  i.part.description  }}</td>
+            <td style="font-size: 200%;  color: purple;">{{  i.quantity  }}</td>
+            <td style="font-size: 200%;  color: purple;">{{  i.part.model_number  }}</td>
+            <td style="font-size: 200%;  color: purple;">{{  i.part.part_number  }}</td>
+            <td style="font-size: 200%;  color: purple;">{{  i.note  }}</td>
+        </tr>
+    {% endfor %}
+</table>

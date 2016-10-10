@@ -1,0 +1,153 @@
+# -*- coding: utf-8 -*-
+"""
+testing.tests (template)
+
+Example test template using test cases defined in testing and helpers
+apps.
+* see testing.tests for example tests using AuthUserTestCase and
+  AuthWorkflowTestBase.
+
+* created: 2013-08-07 Kevin Chan <kefin@makedostudio.com>
+* updated: 2013-08-31 kchan
+"""
+import re
+
+from django.core.urlresolvers import reverse
+from garage import get_setting as _s
+from testing import (
+    AuthUserTestCase,
+    ApiTestCase,
+    AuthWorkflowTestBase,
+    module_exists,
+    create_test_users,
+    KYNDEDGRAM_TESTS_NUM_USERS,
+    KYNDEDGRAM_TEST_MESSAGE_TITLE,
+    KYNDEDGRAM_TEST_MESSAGE,
+    DEFAULT_TEST_IMAGE_PATH_PREFIX,
+    DEFAULT_TEST_IMAGE,
+)
+
+# from profiles.models import (
+#     get_user,
+#     get_user_by_email,
+#     get_user_profile,
+#     UserStatus,
+# )
+#
+# from kyndedgrams.models import KyndedgramPermission
+
+
+
+class BasicTests(AuthUserTestCase):
+
+    def _test_dummy_user(self):
+        """
+        Log in as test user and print out user info.
+        """
+        self._login()
+
+        user = self.base_user.user
+        username = self.base_user.username
+        password = self.base_user.password
+        self._msg('test', 'dummy user info', first=True)
+        self._msg('username', user.get_username())
+        self._msg('email', user.email)
+        self._msg('password', self.base_user.password)
+
+        # * use ``print_user_info`` method of UserInfo object to print
+        #   user data to stdout
+        self.base_user.print_user_info()
+        # * verify user is logged in/not logged in
+        self._msg('logged in', user.is_authenticated())
+        self.assertTrue(user.is_authenticated())
+        self._logout()
+
+        # test home page
+        # * should redirect for unauthenticated users
+        home_url = reverse('home')
+        welcome_url = reverse('welcome')
+        response = self.c.get(home_url)
+        self.assertRedirects(response, welcome_url, status_code=302)
+
+    def _test_module_imports(self):
+        """
+        Ensure modules are importable.
+        """
+        apps = [
+            'profiles',
+            'groups',
+            'kyndedgrams',
+            'authentication',
+            'newspaper',
+            'testing',
+        ]
+        for a in apps:
+            self.assertTrue(module_exists(a))
+
+    def _test_welcome_page(self):
+        """
+        Ensure welcome page returns 200 OK.
+        """
+        # test welcome page
+        # * should return 200 OK
+        url = reverse('welcome')
+        response = self.c.get(url)
+        self.assertEqual(response.status_code, 200)
+
+
+
+# tests using AuthWorkflowTestBase, based on WebTest test case
+#
+# reference/documentation links:
+#
+# * django-webtest
+#   https://pypi.python.org/pypi/django-webtest
+#
+# * WebTest
+#   http://webtest.pythonpaste.org/en/latest/
+
+class WorkflowTests(AuthWorkflowTestBase):
+
+    def _test_simple_authentication_using_login_form(self):
+        """
+        Test simple authentication using login form.
+
+        Test will:
+        * create test user;
+        * go to login form url;
+        * enter username and password and submit form using "Log in"
+          button;
+        * verify that after authenticating user is redirected to profile
+          page.
+        """
+        self._msg('test', 'user login', first=True)
+        url = reverse('auth_login')
+        self._msg('auth_login', url)
+        resp = self.app.get(url)
+        self.assertEqual(resp.status_int, 200)
+
+        # create test user
+        num_test_users = 1
+        u = create_test_users(num_test_users)[0]
+        username = u.username
+        password = u.password
+        self._msg('username', username)
+        self._msg('password', password)
+
+
+        form = resp.forms['login-form']
+        form['username'] = username
+        form['password'] = password
+        resp = form.submit('Log in').maybe_follow()
+
+        page = resp.html
+        #msg('page', page, linebreak=True)
+        title = page.find('title')
+        self._msg('title', str(title))
+
+        # profile page should contain header:
+        # <h2><a href="/profiles/2/">kchan</a></h2>
+        pattern = '<h2><a href="/profiles/\d+/">[^<>]+</a></h2>'
+        matched = re.search(pattern, resp.body)
+        self.assertTrue(matched)
+        self._msg('profile header', matched.group())

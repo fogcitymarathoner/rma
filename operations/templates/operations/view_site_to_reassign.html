@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "operations/_customer_site_header.html" %}</div>
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 16px">
+            {% if request.user|has_group:"user" %}
+                <a class="btn btn-success" id='edit-customer-button' href="{% url 'operations_edit_customer_site' id=site.id  %}">Edit</a>
+            {% endif %}
+            <a class="btn btn-warning" href="{% url 'reassign_customers_to_customer_sites'  %}">Back to Customer Site List</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {% include "operations/_view_site.html" %}
+        </div>
+    </div>
+    {% include "operations/_site_rmas.html" %}
+    <script src="{{ STATIC_URL   }}js/operations.js"></script>
+{% endblock content %}

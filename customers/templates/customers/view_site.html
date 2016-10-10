@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+        <div class="page-header">{% include "customers/_customer_site_header.html" %}</div>
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 16px">
+                {% if request.user|has_group:"user" %}
+                    <a class="btn btn-success" id='edit-customer-button' href="{% url 'edit_customer_site' id=customer.id %}">Edit</a>
+                {% endif %}
+                <a class="btn btn-warning" id='edit-customer-button' href="{% url 'view_customer' id=customer.customer.id %}">Back To Customer</a>
+                {% if request.user|has_group:"poweruser" %}
+                    <a class="btn btn-success btn-danger" id='delete-customer-button' href="{% url 'delete_customer_site' id=customer.id %}">Delete</a>
+                {% endif %}
+                <a class="btn btn-success btn-warning" href="{% url 'list_customer_sites'  %}">Back to Customer Site List</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% include "customers/_view_site.html" %}
+            </div>
+        </div>
+        {% include "customers/_view_rmas.html" %}
+    </div>
+    <script src="{{ STATIC_URL }}customers/js/customers.js"></script>
+{% endblock content %}

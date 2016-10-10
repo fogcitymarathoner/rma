@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load sharepoint_url %}
+{% load clean_address %}
+{% load cycle from future %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+        {% if user.is_authenticated %}
+        <div class="page-header">
+            <h1>Commissioned Sites</h1>
+            <p class="lead">in reverse chronological order of live date</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 16px">
+                {% if request.user|has_group:"user" %}
+                    <a class="btn btn-success" id='create-rma-button' href="{% url 'create_site'  %}">New</a>
+                {% endif %}
+            </div>
+        </div>
+        <div  class="row list-header">
+            <div class="col-md-3">Date-Live</div>
+            <div class="col-md-3">Customer</div>
+            <div class="col-md-6">Address</div>
+        </div>
+        <div class="row">
+            {% for i in sites %}
+                <div class="row  {% cycle 'odd-row' 'even-row' %}">
+                    <div class="col-md-3 {% cycle 'odd-row' 'even-row' %}">
+                        <a href="{% url   'view_site' id=i.id  %}">{{  i.date  }}</a>
+                    </div>
+                    <div class="col-md-3 {% cycle 'odd-row' 'even-row' %}">
+                        <a href="{% url   'view_site' id=i.id  %}">{{  i.name  }}</a>
+                    </div>
+                    <div class="col-md-6 {% cycle 'odd-row' 'even-row' %}">
+                        <a href="{% url   'view_site' id=i.id  %}">{{  i | clean_html_address }}</a>
+                        {% if i.sharepoint_origin == 2 %}
+                            {{ i | share_point_url |safe }}|
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <h1>Please Log In</h1>
+        {% endif %}
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            $( "#nav-bar-rma-list-link" ).removeClass('active');
+            $( "#nav-bar-customers-dropdown" ).removeClass('active');
+            $( "#nav-bar-customers-link" ).removeClass('active');
+            $( "#nav-bar-commissioned-sites-link" ).addClass('active');
+            $( "#nav-bar-list-parts-link" ).removeClass('active');
+            $( "#nav-bar-list-return-items-link" ).removeClass('active');
+            $( "#nav-bar-admin-panel-link" ).removeClass('active');
+        });
+    </script>
+{% endblock content %}

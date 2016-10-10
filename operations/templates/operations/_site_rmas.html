@@ -1,0 +1,28 @@
+{% load cycle from future %}
+<h3>RMAs assigned to this site</h3>
+<div class="row">
+    <div class="col-md-2 field-name">Reference Number</div>
+    <div class="col-md-2 field-name">Date</div>
+    <div class="col-md-3 field-name">Address</div>
+    <div class="col-md-3 field-name">Contact</div>
+    <div class="col-md-2 field-name">Contact Phone</div>
+</div>
+{% for i in site_rmas %}
+    <div class="row  {% cycle 'odd-row' 'even-row' %}">
+        <div class="col-md-2">
+            {{ i.reference_number }}
+        </div>
+        <div class="col-md-2">
+            {{ i.date }}
+        </div>
+        <div class="col-md-3">
+            {{ i.address }}
+        </div>
+        <div class="col-md-3">
+            {{ i.contact }}
+        </div>
+        <div class="col-md-2">
+            {{ i.contact_phone_number }}
+        </div>
+    </div>
+{% endfor %}

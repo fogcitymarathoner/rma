@@ -1,0 +1,49 @@
+minipylib changelog
+===================
+
+0.2.8
+-----
+2013-09-01 kchan
+
+* gen_secret_key: Added try/except block to convert keysize to int if
+  supplied parameter is of the wrong type.
+
+0.2.7
+-----
+2013-09-01 kchan
+
+* Corrected typos (length parameter should be keysize) in
+  gen_secret_key.
+
+0.2.6
+-----
+2013-09-01 kchan
+
+* Rewrote gen_secret_key -- use random.SystemRandom(), added
+  additional parameters (charset and key_string).
+
+
+0.2.4
+-----
+2013-01-05 kchan
+
+* Cosmetic change: deleted empty lines at bottom of utils.py and
+  server/__init__.py.
+
+
+0.2.3
+-----
+2012-12-19 kchan
+
+* Corrected old package names in wsgiserver sources (changed "minipy"
+  to "minipylib").
+* Changed default wsgi server group to "nogroup" (from "nobody").
+
+
+0.2.0
+-----
+2012-05-12 kchan
+
+* Reorganized v0.1.x sources.
+* Released as new package.
+* New package includes wsgiserver modules from minipy library.

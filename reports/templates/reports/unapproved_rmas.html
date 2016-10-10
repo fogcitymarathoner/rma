@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load sharepoint_rma_url %}
+{% block content %}
+    <h1>Unapproved RMAs</h1>
+    <table>
+    {% for i in unapproved_rmas %}
+        <tr class="list-header">
+            <td><a href="{% url   'view_rma' id=i.id  %}">{{ i.date| date:'m/d/Y' }}</a></td>
+            <td><a href="{% url   'view_rma' id=i.id  %}">{{ i.case_number }}</a></td>
+            <td><a href="{% url   'view_rma' id=i.id  %}">{{ i.customer.name }} {% if i.sharepoint_origin == 2 %} {{ i | share_point_rma_url |safe }}| {% endif %}</a></td>
+            <td><a href="{% url   'view_rma' id=i.id  %}">{{ i.issue }}</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+    <script src="{{ STATIC_URL }}reports/js/reports.js"></script>
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+        <div class="page-header">{% include "return_merchandise_authorizations/_customer_header_manage_rma.html" %}</div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Manage RMA Items</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 16px">
+                {% if request.user|has_group:"user" %}
+                    <a class="btn btn-success" id='create-returned-item-button' href="{% url 'create_returned_item' id=rma.id %}">Create Returned Item</a>
+                {% endif %}
+            </div>
+        </div>
+        {% include "return_merchandise_authorizations/_tabs.html" %}
+        <div class="tab-content">
+          <div class="tab-pane" id="view"></div>
+          <div class="tab-pane active" id="items">
+              {% include "return_merchandise_authorizations/_manage_items.html" %}
+          </div>
+          <div class="tab-pane" id="attachments">Your Settings tab content here</div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('#tabs').tab();
+            $('#rma-view-anchor').removeClass('active');
+            $('#rma-manage-items').addClass('active');
+            $('#rma-manage-attachments').removeClass('active');
+            $('#rma-manage-extra-field').removeClass('active');
+        });
+        $(function () {
+            $('a#rma-manage-items-anchor').click(function (e) {
+                e.preventDefault();
+            });
+
+        })
+    </script>
+{% endblock content %}

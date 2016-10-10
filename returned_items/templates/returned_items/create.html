@@ -1,0 +1,15 @@
+{% extends "base_form.html" %}
+{% block content %}
+    <div class="container">
+    <div class="page-header">{% include "returned_items/_customer_header.html" %}</div>
+    <form id='create-returned-item' action="" method="post">{% csrf_token %}
+        <table>
+            {% include "returned_items/_customer_form.html" %}
+        </table>
+        <input class="btn primary" type="submit" value="Save Returned Part" />
+        <a  class="btn btn-success back" href="#">CANCEL</a>
+    </form>
+
+    <script src="{{ STATIC_URL   }}return_merchandise_authorizations/js/returned_items_create.js"></script>
+
+{% endblock content %}

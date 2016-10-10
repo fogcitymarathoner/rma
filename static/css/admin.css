@@ -1,0 +1,141 @@
+/*
+ *  styles for django admin
+ *  * customize django admin backend to increase font size
+ *    and make input boxes bigger.
+ *
+ *  * created: 2011-03-10 Kevin Chan <kefin@makedostudio.com>
+ *  * updated: 2013-01-05 kchan
+ */
+
+/* ---------------- ADMIN INTERFACE OVERRIDES (BEGIN) */
+
+#header
+{
+    background-color: #53708d !important;
+}
+
+#branding h1
+{
+    /* padding: 0 10px; */
+    padding: 0 0 0 20px;
+}
+
+#content h1
+{
+    padding: 5px 0 10px 0;
+}
+
+div.breadcrumbs {
+    padding: 4px 8px 4px 18px !important;
+    border-top: none !important;
+}
+
+/* ---------------- ADMIN INTERFACE OVERRIDES (BEGIN) */
+
+
+
+/* ---------------- NAV GLOBAL LINKS (BEGIN) */
+
+div.nav-global-container
+{
+    clear: both;
+    margin: 0;
+    padding: 0;
+    background-color: #8bb5e1;
+}
+
+.nav-global
+{
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    border-top: 4px solid #ccc;
+    border-bottom: 4px solid #ccc;
+}
+
+ul.admin-nav-links
+{
+    margin: 0 0 0 10px;
+    padding: 0;
+    float: left;
+    width: auto;
+    background-color: #f2f2f2;
+}
+
+ul.admin-nav-links li
+{
+    float: left;
+    width: auto;
+    list-style: none;
+    border-right: 1px solid #e6e6e6;
+    font-weight: bold !important;
+    font-size: 1.1em !important;
+    line-height: 1.2em !important;
+}
+
+ul.admin-nav-links li a
+{
+    float: left;
+    width: auto;
+    margin: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+ul.admin-nav-links a:link,
+ul.admin-nav-links a:visited
+{
+    width: auto;
+    text-decoration: none;
+    color: #888 !important;
+}
+
+ul.admin-nav-links a:hover,
+ul.admin-nav-links a:active
+{
+    color: #fff !important;
+    text-decoration: none !important;
+    background-color: #a7c2de;
+}
+
+/* ---------------- NAV GLOBAL LINKS (END) */
+
+
+
+/* ---------------- FORM STYLES (BEGIN) */
+
+input, textarea, select, .form-row p
+{
+    font-size: 1.05em !important;
+    color: #4c4c4c !important;
+}
+
+.help, p.help
+{
+    font-size: 1.05em !important;
+    color: #888 !important;
+}
+
+form .aligned p.help
+{
+    padding-left: 30px !important;
+}
+
+.vTextField, .vURLField
+{
+    width: 48em !important;
+}
+
+.vDateField, .vTimeField
+{
+    width: 7em !important;
+}
+
+#login-form input
+{
+    margin: 0 auto 0 auto;
+    width: 10em !important;
+    font-size: 1.15em !important;
+}
+
+/* ---------------- FORM STYLES (END) */

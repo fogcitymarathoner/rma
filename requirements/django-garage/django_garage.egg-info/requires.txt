@@ -1,0 +1,6 @@
+django
+markdown
+textile
+PIL
+pyyaml
+pytz

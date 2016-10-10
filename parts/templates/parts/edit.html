@@ -1,0 +1,13 @@
+{% extends "base_form.html" %}
+{% block content %}
+    <div class="container">
+    <div class="page-header"><h1>Edit Part Details</h1></div>
+    <form id='edit-part' action="" method="post">{% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input class="btn primary" type="submit" value="Save Part" />
+        <button class="btn primary" type="submit"><a href="{% url 'view_part' id=part.id  %}">CANCEL</a></button>
+    </form>
+    <script src="{{ STATIC_URL   }}return_merchandise_authorizations/js/rma_edit.js"></script>
+{% endblock content %}

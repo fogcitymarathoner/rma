@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load sharepoint_url %}
+{% load user_group %}
+{% block content %}
+    <div class="container">
+        <div class="page-header">{% include "commissioned_sites/_customer_header.html" %}</div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Manage Commissioned Site</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 16px">
+                {% if request.user|has_group:"user" %}
+                    <a class="btn btn-success" id='edit-site-button' href="{% url 'edit_site' id=site.id  %}">Edit</a>
+                {% endif %}
+
+                {% if request.user|has_group:"poweruser" %}
+                    <a class="btn btn-success" id='delete-site-button' href="{% url 'delete_site' id=site.id  %}">Delete</a>
+                {% endif %}
+
+                {% if site.sharepoint_origin == 2 %}
+                    {{ site | share_point_url |safe }}
+                {% endif %}
+            </div>
+        </div>
+        {% include "commissioned_sites/_tabs.html" %}
+        {% include "commissioned_sites/_view.html" %}
+
+    </div>
+
+    <script src="{{ STATIC_URL }}/commissioned_sites/js/fix_navs.js"></script>
+{% endblock content %}

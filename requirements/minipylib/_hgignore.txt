@@ -1,0 +1,12 @@
+syntax: glob
+.DS_Store
+*~
+*.pyc
+*_BAK
+workfiles
+docs/build
+dist/
+build/
+tools/
+UNUSED/
+minipylib.egg-info/
